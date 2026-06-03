@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Method — Blackhat Golf PH</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #D4AF37;
+  --white: #ffffff;
+  --off-white: #f9f9f9;
+  --border-light: #dedede;
+  --dark-overlay: #212121;
+  --black: #000000;
+  --text-muted: #878a9d;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Lora', 'Georgia', serif;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-serif); font-size: 17px; line-height: 1.7; color: var(--black); -webkit-font-smoothing: antialiased; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+h1, h2, h3 { font-family: var(--font-sans); }
+h1 { font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.03em; text-transform: uppercase; line-height: 1.05; }
+h2 { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; letter-spacing: -0.01em; text-transform: uppercase; }
+.section-label { font-family: var(--font-sans); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 12px; }
+
+/* Header */
+.header { position: fixed; top: 0; left: 0; right: 0; height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 100; transition: all 0.3s; background: rgba(255,255,255,0.95); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.logo { font-family: var(--font-sans); font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+.nav { display: flex; gap: 36px; }
+.nav a { font-family: var(--font-sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--black); text-decoration: none; position: relative; transition: color 0.3s; }
+.nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
+.nav a:hover { color: var(--gold); }
+.nav a:hover::after { width: 100%; }
+
+/* Buttons */
+.btn { display: inline-block; font-family: var(--font-sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 14px 32px; text-decoration: none; cursor: pointer; transition: var(--transition); border: 2px solid transparent; }
+.btn-primary { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.btn-primary:hover { background: transparent; color: var(--gold); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--black); border-color: #ccc; }
+.btn-outline:hover { background: var(--black); color: var(--white); transform: translateY(-2px); }
+
+/* Page hero */
+.page-hero { padding: 160px 0 80px; background: var(--off-white); text-align: center; }
+.page-hero h1 { margin-bottom: 20px; }
+.page-hero p { font-size: 19px; color: #666; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+/* Section */
+.section { padding: 100px 0; }
+.section-dark { background: var(--black); color: var(--white); }
+.section-dark h2 { color: var(--white); }
+.intro-text { font-size: 18px; color: #666; max-width: 600px; margin-bottom: 50px; line-height: 1.7; }
+.section-dark .intro-text { color: rgba(255,255,255,0.55); }
+
+/* Grid */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+
+/* Method card */
+.method-card { border-left: 4px solid var(--gold); padding: 40px; background: var(--off-white); transition: var(--transition); }
+.method-card:hover { transform: translateX(4px); }
+.method-num { font-family: var(--font-sans); font-size: 64px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 12px; opacity: 0.3; }
+.method-card h3 { font-size: 22px; margin-bottom: 10px; }
+.method-card p { font-size: 15px; color: #666; line-height: 1.7; }
+
+/* Dark method card */
+.method-card-dark { background: rgba(255,255,255,0.03); border-left-color: var(--gold); }
+.method-card-dark h3 { color: var(--white); }
+.method-card-dark p { color: rgba(255,255,255,0.55); }
+
+/* Quote */
+.pull-quote { padding: 80px 0; background: var(--black); text-align: center; }
+.pull-quote blockquote { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 32px); font-style: italic; color: var(--white); max-width: 700px; margin: 0 auto; line-height: 1.5; }
+.pull-quote cite { display: block; margin-top: 20px; font-family: var(--font-sans); font-size: 13px; font-style: normal; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); }
+
+/* Feature list */
+.feature-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+.feature-item { display: flex; gap: 16px; align-items: flex-start; padding: 24px; background: var(--off-white); border: 1px solid var(--border-light); transition: var(--transition); }
+.feature-item:hover { border-color: var(--gold); }
+.feature-icon { font-size: 28px; flex-shrink: 0; }
+.feature-item h4 { font-family: var(--font-sans); font-size: 16px; margin-bottom: 4px; }
+.feature-item p { font-size: 14px; color: #666; }
+
+/* Image row */
+.image-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+.image-row img { width: 100%; height: 300px; object-fit: cover; }
+
+/* Footer */
+.footer { background: var(--black); padding: 48px 0; color: rgba(255,255,255,0.4); font-size: 14px; text-align: center; }
+
+/* Cookie */
+.cookie-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(33,33,33,0.97); backdrop-filter: blur(12px); color: var(--white); padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; z-index: 200; font-size: 13px; }
+
+@media (max-width: 768px) {
+  .grid-3, .grid-2, .feature-list { grid-template-columns: 1fr; }
+  .image-row { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+  .page-hero { padding: 120px 0 60px; }
+  .nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">Blackhat PH</a>
+  <nav class="nav">
+    <a href="index.html#about">About</a>
+    <a href="method.html" style="color:var(--gold);">The Method</a>
+    <a href="index.html#tour">Mini-Tour</a>
+    <a href="index.html#join">Join</a>
+  </nav>
+</header>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <p class="section-label">The Framework</p>
+    <h1>The Meechai Method&trade;</h1>
+    <p>A neuroscience-backed approach to golf instruction. Three pillars. One integrated system. Designed to transform how you learn — permanently.</p>
+  </div>
+</section>
+
+<!-- The Problem -->
+<section class="section">
+  <div class="container">
+    <p class="section-label">Why It Exists</p>
+    <h2>Golf Instruction<br>Hasn't Changed in 50 Years</h2>
+    <div class="grid-2" style="margin-top: 40px;">
+      <div>
+        <p style="font-size: 17px; color: #555; line-height: 1.8;">Most coaches tell you <em>what</em> to do — adjust your grip, rotate your hips, keep your head down. But they never teach you <em>how to learn</em>.</p>
+        <p style="font-size: 17px; color: #555; line-height: 1.8; margin-top: 16px;">The Meechai Method flips this. We don't give you fixes. We give you a framework for self-discovery — so every practice session makes you better, forever.</p>
+      </div>
+      <div>
+        <p style="font-size: 17px; color: #555; line-height: 1.8;">Traditional approach: <strong>Instructor-dependent.</strong> You improve when they're watching. You regress when they're not.</p>
+        <p style="font-size: 17px; color: #555; line-height: 1.8; margin-top: 16px;">Our approach: <strong>Self-sufficient.</strong> You learn to diagnose, adjust, and improve on your own. The coach becomes a guide, not a crutch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="pull-quote">
+  <div class="container">
+    <blockquote>"We don't teach golf swings. We teach people how to learn — and golf is just the vehicle."</blockquote>
+    <cite>— The Blackhat Philosophy</cite>
+  </div>
+</section>
+
+<!-- Three Pillars -->
+<section class="section section-dark">
+  <div class="container">
+    <p class="section-label">The Three Pillars</p>
+    <h2>Mind. Body. Club.</h2>
+    <p class="intro-text">Every session integrates all three. You can't separate the player from the swing.</p>
+    <div class="grid-3">
+      <div class="method-card method-card-dark">
+        <div class="method-num">01</div>
+        <h3>Mind-Focused Learning</h3>
+        <p>We train awareness before mechanics. Focus, decision-making, emotional regulation. Golf is 90% mental — we start there. Every session builds the cognitive skills that make technique stick.</p>
+      </div>
+      <div class="method-card method-card-dark">
+        <div class="method-num">02</div>
+        <h3>Body-Focused Learning</h3>
+        <p>Your body is your primary equipment. We assess movement quality, athleticism, and physical readiness. Mobility work, recovery protocols, and sport-specific conditioning built into every program.</p>
+      </div>
+      <div class="method-card method-card-dark">
+        <div class="method-num">03</div>
+        <h3>Club-Focused Learning</h3>
+        <p>Understand how each club functions — its design, its purpose, its feel. We replace mechanical swing thoughts with sensory feedback. Impact over aesthetics. Results that transfer to the course.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What to Expect -->
+<section class="section">
+  <div class="container">
+    <p class="section-label">Your Journey</p>
+    <h2>What to Expect</h2>
+    <p class="intro-text">Every Blackhat program follows the same learning arc — whether it's a 3-day vacation school or a year-long membership.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon">🎯</div>
+        <div>
+          <h4>Assessment First</h4>
+          <p>We evaluate your cognitive style, movement patterns, and current skill level before we give a single instruction.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🧠</div>
+        <div>
+          <h4>Mindset Training</h4>
+          <p>Pre-shot routines, course management, and emotional control — the skills that separate good golfers from great ones.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🏌️</div>
+        <div>
+          <h4>Guided Discovery</h4>
+          <p>We don't give answers. We ask questions that lead you to your own breakthroughs. Learning that lasts.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📋</div>
+        <div>
+          <h4>On-Course Integration</h4>
+          <p>Every program includes real play. Range skills mean nothing if they don't transfer to the course.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <div>
+          <h4>Measured Progress</h4>
+          <p>Trackable metrics — not just handicap, but decision quality, consistency scores, and mental game markers.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🤝</div>
+        <div>
+          <h4>Community Support</h4>
+          <p>You're not learning alone. Train alongside peers at your level, share breakthroughs, and build lasting connections.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--off-white);text-align:center;">
+  <div class="container">
+    <p class="section-label">Ready to Begin</p>
+    <h2>Experience the Method</h2>
+    <p style="color:#666;font-size:18px;margin-bottom:32px;">Join us for a session. Feel the difference between being told what to do — and learning how to learn.</p>
+    <a href="index.html#join" class="btn btn-primary">Join Blackhat PH</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p style="font-family:var(--font-sans);font-weight:900;color:var(--white);text-transform:uppercase;margin-bottom:8px;">Blackhat PH</p>
+    <p>&copy; 2026 Blackhat Golf Philippines. hello@blackhat.ph</p>
+  </div>
+</footer>
+
+<div class="cookie-bar" id="cookieBar">
+  <span>We use cookies to improve your experience.</span>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-outline" onclick="document.getElementById('cookieBar').style.display='none'" style="padding:8px 18px;font-size:11px;color:var(--white);border-color:rgba(255,255,255,0.3);">Decline</button>
+    <button class="btn btn-primary" onclick="document.getElementById('cookieBar').style.display='none'" style="padding:8px 18px;font-size:11px;">Accept</button>
+  </div>
+</div>
+
+</body>
+</html>

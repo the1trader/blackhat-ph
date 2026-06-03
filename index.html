@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackhat Golf PH — Philippines</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #D4AF37;
+  --white: #ffffff;
+  --off-white: #f9f9f9;
+  --border-light: #dedede;
+  --dark-overlay: #212121;
+  --black: #000000;
+  --text-muted: #878a9d;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Lora', 'Georgia', serif;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-serif); font-size: 17px; line-height: 1.7; color: var(--black); -webkit-font-smoothing: antialiased; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+h1, h2, h3 { font-family: var(--font-sans); }
+h1 { font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.95; }
+h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.01em; text-transform: uppercase; }
+.section-label { font-family: var(--font-sans); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 12px; }
+
+/* Header */
+.header { position: fixed; top: 0; left: 0; right: 0; height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 100; transition: height 0.3s, background 0.3s; }
+.header.scrolled { height: 60px; background: rgba(255,255,255,0.95); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.logo { font-family: var(--font-sans); font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+.header.scrolled .logo { color: var(--black); }
+.nav { display: flex; gap: 36px; }
+.nav a { font-family: var(--font-sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); text-decoration: none; position: relative; transition: color 0.3s; }
+.nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
+.nav a:hover { color: var(--white); }
+.nav a:hover::after { width: 100%; }
+.header.scrolled .nav a { color: var(--black); }
+.header.scrolled .nav a:hover { color: var(--gold); }
+
+/* Buttons */
+.btn { display: inline-block; font-family: var(--font-sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 14px 32px; text-decoration: none; cursor: pointer; transition: var(--transition); border: 2px solid transparent; }
+.btn-primary { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.btn-primary:hover { background: transparent; color: var(--gold); transform: translateY(-2px); }
+.btn-outline-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.3); }
+.btn-outline-light:hover { background: var(--white); color: var(--dark-overlay); transform: translateY(-2px); }
+
+/* Hero */
+.hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: #1a1a1a; }
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%); }
+.hero-content { position: relative; z-index: 2; padding: 120px 60px 80px; max-width: 700px; }
+.hero .section-label { margin-bottom: 20px; }
+.hero h1 { color: var(--white); margin-bottom: 24px; }
+.hero p { font-size: 19px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; max-width: 500px; }
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Section */
+.section { padding: 100px 0; }
+.section-dark { background: var(--black); color: var(--white); }
+.section-dark h2 { color: var(--white); }
+.intro-text { font-size: 18px; color: #666; max-width: 600px; margin-bottom: 50px; line-height: 1.7; }
+.section-dark .intro-text { color: rgba(255,255,255,0.55); }
+
+/* Grid */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* Card */
+.card { background: var(--off-white); border: 2px solid var(--border-light); padding: 40px; transition: var(--transition); }
+.card:hover { border-color: var(--gold); transform: translateY(-3px); }
+.card-num { font-family: var(--font-sans); font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+.card h3 { font-size: 20px; margin-bottom: 10px; }
+.card p { font-size: 15px; color: #666; line-height: 1.7; }
+
+.card-dark { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+.card-dark:hover { border-color: var(--gold); }
+.card-dark h3 { color: var(--white); }
+.card-dark p { color: rgba(255,255,255,0.55); }
+
+/* Stats */
+.stats-strip { padding: 56px 0; background: var(--black); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+.stat-num { font-family: var(--font-sans); font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; color: var(--gold); }
+.stat-label { font-family: var(--font-sans); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 4px; }
+
+/* Feature row */
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.feature-img { width: 100%; height: 380px; object-fit: cover; border: 2px solid var(--border-light); }
+
+/* CTA */
+.cta-section { text-align: center; background: var(--off-white); }
+.cta-section p { color: #666; margin-bottom: 32px; font-size: 18px; }
+
+/* Footer */
+.footer { background: var(--black); padding: 48px 0; color: rgba(255,255,255,0.4); font-size: 14px; text-align: center; }
+
+/* Cookie */
+.cookie-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(33,33,33,0.97); backdrop-filter: blur(12px); color: var(--white); padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; z-index: 200; font-size: 13px; }
+
+@media (max-width: 768px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .feature-row { grid-template-columns: 1fr; gap: 32px; }
+  .hero-content { padding: 100px 24px 60px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .nav { display: none; }
+  .section { padding: 60px 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <a href="#" class="logo">Blackhat PH</a>
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="method.html">The Method</a>
+    <a href="#tour">Mini-Tour</a>
+    <a href="#join">Join</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-bg" src="hero-bg.jpg" alt="Blackhat Golf Philippines">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="section-label">Now in the Philippines</p>
+    <h1>Golf,<br>Reimagined.</h1>
+    <p>A revolutionary method. A premium community. The Blackhat experience arrives in the Philippines — for golfers ready to break through.</p>
+    <div class="hero-buttons">
+      <a href="method.html" class="btn btn-primary">Discover the Method</a>
+      <a href="#join" class="btn btn-outline-light">Join the Community</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div><div class="stat-num">20+</div><div class="stat-label">Years Coaching</div></div>
+      <div><div class="stat-num">1,000+</div><div class="stat-label">Students Worldwide</div></div>
+      <div><div class="stat-num">5</div><div class="stat-label">PH Partner Courses</div></div>
+      <div><div class="stat-num">1</div><div class="stat-label">Unified Method</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- The Difference -->
+<section class="section" id="about">
+  <div class="container">
+    <p class="section-label">The Blackhat Difference</p>
+    <h2>A New Way to Learn Golf</h2>
+    <p class="intro-text">Traditional golf instruction hasn't evolved in decades. We built a method rooted in neuroscience — teaching <em>how you learn</em>, not just what to do.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-num">01</div>
+        <h3>Mind-First</h3>
+        <p>Golf is mental. We train awareness, decision-making, and confidence before we touch a club.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <h3>Body Awareness</h3>
+        <p>Your body is your primary equipment. Movement quality comes before swing mechanics.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <h3>Club Mastery</h3>
+        <p>Understand how each club functions. Feel over force. Impact over aesthetics. Results that last.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mini-Tour -->
+<section class="section section-dark" id="tour">
+  <div class="container">
+    <p class="section-label">Compete</p>
+    <h2>The Blackhat Mini-Tour</h2>
+    <p class="intro-text">Monthly tournaments across the Philippines' best courses. Multiple divisions, real competition, real community.</p>
+    <div class="grid-3">
+      <div class="card card-dark">
+        <h3>12+ Events/Year</h3>
+        <p>Monthly tournaments across partner venues — from Manila to Tagaytay.</p>
+      </div>
+      <div class="card card-dark">
+        <h3>Order of Merit</h3>
+        <p>Season-long ranking. Track your progress against the community.</p>
+      </div>
+      <div class="card card-dark">
+        <h3>6 Divisions</h3>
+        <p>Pro, Amateur, Junior, Senior, Women's, Corporate. Your level, your challenge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vacation School -->
+<section class="section">
+  <div class="container">
+    <div class="feature-row">
+      <div>
+        <p class="section-label">Experience</p>
+        <h2>Vacation Golf Schools</h2>
+        <p style="color:#666;font-size:17px;margin-top:16px;line-height:1.7;">3-day immersive programs at the Philippines' most stunning destinations. Morning training. Afternoon play. Evening social. Leave with a better game and new friends.</p>
+        <a href="method.html" class="btn btn-primary" style="margin-top:28px;">Learn More</a>
+      </div>
+      <img class="feature-img" src="community.jpg" alt="Blackhat Golf Community">
+    </div>
+  </div>
+</section>
+
+<!-- Join CTA -->
+<section class="section cta-section" id="join">
+  <div class="container">
+    <p class="section-label">Membership</p>
+    <h2>Ready to Join?</h2>
+    <p>Be part of the Philippines' most exciting golf community.<br>Individual memberships starting at ₱4,999/year.</p>
+    <a href="#" class="btn btn-primary">Become a Member</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p style="font-family:var(--font-sans);font-weight:900;color:var(--white);text-transform:uppercase;margin-bottom:8px;">Blackhat PH</p>
+    <p>&copy; 2026 Blackhat Golf Philippines. hello@blackhat.ph</p>
+  </div>
+</footer>
+
+<div class="cookie-bar" id="cookieBar">
+  <span>We use cookies to improve your experience.</span>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-outline-light" onclick="document.getElementById('cookieBar').style.display='none'" style="padding:8px 18px;font-size:11px;">Decline</button>
+    <button class="btn btn-primary" onclick="document.getElementById('cookieBar').style.display='none'" style="padding:8px 18px;font-size:11px;">Accept</button>
+  </div>
+</div>
+
+<script>
+document.getElementById('header').addEventListener('scroll', function(e) {
+  // handled by window scroll below
+});
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
+</script>
+
+</body>
+</html>
